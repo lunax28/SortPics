@@ -18,20 +18,20 @@ public class SortPics {
      */
     public static void main(String[] args) {
 
-        File sourcepath = null;
-        sourcepath = new File("/Users/equilibrium/Desktop/8033772864888");
+        File sourcePath = null;
+        sourcePath = new File("/Users/equilibrium/Desktop/8033772864888");
 
-        //System.out.println(sourcepath);
-        File listRoot[] = sourcepath.listFiles();
-
-        //System.out.println(listRoot);
+        //A list of all the files in our source path
+        File listRoot[] = sourcePath.listFiles();
+       
         int count = 0;
+        //looping over all the files in our source path
         while (count < listRoot.length && listRoot[count].exists()) {
-
+            
+            //if a file IS a directory or its extension is .jpg do, else return
             if (listRoot[count].isDirectory() || listRoot[count].getName().substring(listRoot[count].getName().lastIndexOf(".")).equals(".jpg")) {
 
-                //if(listRoot[count].getName().equals(listRoot[count+1].getName().)
-                //System.out.println(listRoot[count]);
+                //if the previous folder name is equal to the next file name without its extension MOVE, else return
                 if (stripExtension(listRoot[count - 1].getName()).equals(stripExtension(listRoot[count].getName()))) {
                     System.out.println("ok");
 
@@ -52,17 +52,15 @@ public class SortPics {
                     System.out.println("not equal!");
                     return;
                 }
-                //System.out.println(stripExtension(listRoot[count].getName()));
 
-                //System.out.println(listRoot[2].getName().substring(listRoot[2].getName().lastIndexOf(".")));
             }
             count = count + 2;
         }
     }
 
     static String stripExtension(String str) {
+        
         // Handle null case specially.
-
         if (str == null) {
             return null;
         }
