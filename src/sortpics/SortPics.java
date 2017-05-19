@@ -22,51 +22,61 @@ public class SortPics {
         sourcepath = new File("/Users/equilibrium/Desktop/8033772864888");
 
         //System.out.println(sourcepath);
-
         File listRoot[] = sourcepath.listFiles();
 
         //System.out.println(listRoot);
         int count = 0;
         while (count < listRoot.length && listRoot[count].exists()) {
-            
-            
 
             if (listRoot[count].isDirectory() || listRoot[count].getName().substring(listRoot[count].getName().lastIndexOf(".")).equals(".jpg")) {
-                
-                
+
                 //if(listRoot[count].getName().equals(listRoot[count+1].getName().)
-                
-                System.out.println(listRoot[count]);
-                
-                
-                System.out.println(stripExtension(listRoot[count].getName()));
-                
-                
+                //System.out.println(listRoot[count]);
+                if (stripExtension(listRoot[count - 1].getName()).equals(stripExtension(listRoot[count].getName()))) {
+                    System.out.println("ok");
+
+                    try {
+
+                        if (listRoot[count].renameTo(new File(listRoot[count - 1] + "/" + listRoot[count].getName()))) {
+                            System.out.println("File is moved successfully!");
+                        } else {
+                            System.out.println("an error has occured");
+                            return;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    System.out.println("not equal!");
+                    return;
+                }
+                //System.out.println(stripExtension(listRoot[count].getName()));
+
                 //System.out.println(listRoot[2].getName().substring(listRoot[2].getName().lastIndexOf(".")));
-                
             }
             count = count + 2;
         }
     }
-        
-        static String stripExtension (String str) {
+
+    static String stripExtension(String str) {
         // Handle null case specially.
 
-        if (str == null) return null;
+        if (str == null) {
+            return null;
+        }
 
         // Get position of last '.'.
-
         int pos = str.lastIndexOf(".");
 
         // If there wasn't any '.' just return the string as is.
-
-        if (pos == -1) return str;
+        if (pos == -1) {
+            return str;
+        }
 
         // Otherwise return the string, up to the dot.
-
         return str.substring(0, pos);
     }
-
-    
 
 }
